@@ -41,26 +41,45 @@ const registerUser = async (req, res) => {
 };
 
 // 🔵 LOGIN
+// const loginUser = async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+
+//         const user = await User.findOne({ email });
+
+//         if (user && await bcrypt.compare(password, user.password)) {
+//             res.json({
+//                 _id: user._id,
+//                 name: user.name,
+//                 email: user.email,
+//                 token: generateToken(user._id)
+//             });
+//         } else {
+//             res.status(401).json({ message: "Invalid credentials" });
+//         }
+
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// };
+
 const loginUser = async (req, res) => {
-    try {
-        const { email, password } = req.body;
+  try {
+    console.log("LOGIN HIT");
+    console.log(req.body);
 
-        const user = await User.findOne({ email });
+    return res.json({
+      success: true,
+      message: "Login route working"
+    });
 
-        if (user && await bcrypt.compare(password, user.password)) {
-            res.json({
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                token: generateToken(user._id)
-            });
-        } else {
-            res.status(401).json({ message: "Invalid credentials" });
-        }
+  } catch (error) {
+    console.log(error);
 
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    res.status(500).json({
+      message: error.message
+    });
+  }
 };
 
 module.exports = { registerUser, loginUser };
