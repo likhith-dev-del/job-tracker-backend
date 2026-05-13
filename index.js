@@ -5,29 +5,22 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 const jobRoutes = require("./routes/jobRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const connectDB = require("./config/db");
 
-const authRoutes = require("./routes/authRoutes");
-
-
-app.use(express.json()); // middle ware
-
-app.use("/jobs", jobRoutes);
-
-app.get("/" , (req, res) =>{
-
-    res.send("Server running");
-});
-
-app.listen(5000, () =>{
-
-    console.log("Server is started");
-});
- 
-app.use("/auth", authRoutes);
-
 connectDB();
 
+app.use("/jobs", jobRoutes);
+app.use("/auth", authRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Server running");
+});
+
+app.listen(5000, () => {
+  console.log("Server is started");
+});
