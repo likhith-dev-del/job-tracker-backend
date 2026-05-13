@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel ="stylesheet" href="style.css">
+</head>
+<body>
+     
+    <h1>Job Trcaker</h1>
+
+    <input id="company" placeholder="company">
+    <input id="role" placeholder="Role">
+    <input id="status" placeholder="Status">
+    <input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+     <button onclick="addJob()">Add Job</button>
+
+     <select id ="filterStat" onchange ="fetchJobs()">
+
+        <option value="">All</option>
+        <option value="Applied">Applied</option>
+        <option value="Interview">Interview</option>
+        <option value="Offer">Offer</option>
+        <option value="Rejected">Rejected</option>
+     </select>
+
+     <h2>Job List</h2>
+     <ul id="joblist">
+     </ul>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
