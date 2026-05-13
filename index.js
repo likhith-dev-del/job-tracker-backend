@@ -17,10 +17,9 @@ connectDB();
 app.use("/jobs", jobRoutes);
 app.use("/auth", authRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Server running");
+app.get("/test", (req, res) => {
+  res.json({ message: "Backend updated successfully" });
 });
-
 
 const PORT = process.env.PORT || 5000;
 
