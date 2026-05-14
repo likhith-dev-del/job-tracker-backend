@@ -64,22 +64,29 @@ const registerUser = async (req, res) => {
 // };
 
 const loginUser = async (req, res) => {
-  try {
-    console.log("LOGIN HIT");
-    console.log(req.body);
+    try {
+        const { email, password } = req.body;
 
-    return res.json({
-      success: true,
-      message: "Login route working"
-    });
+        const user = await User.findOne({ email });
 
-  } catch (error) {
-    console.log(error);
+        if (user && await bcrypt.compare(password, user.password)) {
+            res.json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user._id)
+            });
+        } else {
+            res.status(401).json({
+                message: "Invalid credentials"
+            });
+        }
 
-    res.status(500).json({
-      message: error.message
-    });
-  }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
 };
 
 module.exports = { registerUser, loginUser };
